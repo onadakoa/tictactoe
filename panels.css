@@ -14,8 +14,6 @@
 
 .container.stats {
     grid-template-columns: 0vw 30vw 70vw !important;
-
-
 }
 
 @media screen and (width <=800px) {
@@ -25,7 +23,6 @@
 
     .container.stats {
         grid-template-columns: 0vw 50vw 50vw !important;
-        ;
     }
 }
 
@@ -100,3 +97,183 @@
         gap: 20px !important;
     }
 }
+
+/* settings Panel */
+
+.settingsPanel {
+    --border-radius: 30px;
+    box-sizing: border-box;
+    background-color: var(--sub-alt-color);
+    padding: 10px;
+    border-radius: var(--border-radius) 0px 0px var(--border-radius);
+}
+
+.container.stats>.settingsPanel {
+    border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+}
+
+.container.stats .statistics>div {
+    border: 2px solid var(--accent-color);
+}
+
+.settingsPanel {
+    display: grid;
+    grid-template-rows: 10% 5fr 1fr;
+
+    >.title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    >.manage {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+
+
+    }
+}
+
+.manage>div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+
+    >div {
+        background-color: var(--background-color);
+        padding: 20px;
+    }
+
+    >div:hover {
+        border: 2px solid var(--accent-color);
+    }
+}
+
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+
+    >.playersName {
+        width: 100%;
+
+        display: grid;
+        grid-template-rows: 2fr 1fr 2fr;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.playersName {
+    >.player {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    >.vs {
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 900;
+    }
+}
+
+@media screen and (width <=950px) {
+    .manage {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .manage>div>div {
+        width: 90%;
+        text-align: center;
+    }
+
+    .playersName>.player {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+/* ^settings Panel^ */
+
+
+
+/* statistics Panel */
+.statisticsPanel {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    >.statsTable {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        box-sizing: border-box;
+
+
+        >div {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+
+            background-color: color-mix(in srgb, var(--sub-alt-color) 100%, #aaaaaa 10%);
+        }
+
+        >.head {
+            background-color: var(--sub-alt-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+    }
+}
+
+
+@media screen and (width <=800px) {
+    .statsTable>div {
+        padding: 5px !important;
+        font-size: 0.7rem !important;
+    }
+}
+
+.reset {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    background-color: var(--red-color);
+    color: white;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >span {
+        font-size: 1.5rem;
+    }
+}
+
+.reset:hover {
+    cursor: pointer;
+    background-color: color-mix(in srgb, var(--red-color) 100%, #444444 50%);
+}
+
+/* ^statistics Panel^ */

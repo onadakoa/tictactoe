@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container stats">
         <div class="gamePanel">
             <div class="players">
                 <div>
@@ -37,8 +37,67 @@
                 </div>
             </div>
         </div>
-        <div class="settingsPanel">center</div>
-        <div class="statisticsPanel">right</div>
+        <div class="settingsPanel">
+            <div class="title">Settings</div>
+            <div class="settings">
+                <div class="playersName">
+                    <div class="player">
+                        <div class="type">
+                            <select id="playerAType">
+                                <option value="Human">Human</option>
+                                <option value="random">Random moves</option>
+                                <option value="minimax">MiniMax algorithm</option>
+                            </select>
+                        </div>
+                        <div class="name">
+                            <input type="text" id="playerAName" value="playerA">
+                        </div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="player">
+                        <div class="type">
+                            <select id="playerBType">
+                                <option value="Human">Human</option>
+                                <option value="random">Random moves</option>
+                                <option value="minimax">MiniMax algorithm</option>
+                            </select>
+                        </div>
+                        <div class="name">
+                            <input type="text" id="playerBName" value="playerB">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="manage">
+                <div class="start">
+                    <div>Start Game</div>
+                </div>
+                <div class="statistics">
+                    <div>Statistics</div>
+                </div>
+            </div>
+        </div>
+        <div class="statisticsPanel">
+            <div class="statsTable">
+                <div class="head">
+                    <div>Player</div>
+                    <div>Player</div>
+                    <div>Winner</div>
+                    <div>Time</div>
+                    <div>Date</div>
+                </div>
+                <div>
+                    <div>onadakoa</div>
+                    <div>Bot</div>
+                    <div>onadakoa</div>
+                    <div>00.00.00</div>
+                    <div>29.05.2024</div>
+                </div>
+            </div>
+            <div class="reset">
+                Reset Data <span class="material-symbols-outlined">restart_alt</span>
+            </div>
+        </div>
     </div>
 </body>
 
