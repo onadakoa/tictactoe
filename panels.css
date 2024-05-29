@@ -11,17 +11,21 @@
     }
 
 }
+
 .container.stats {
     grid-template-columns: 0vw 30vw 70vw !important;
 
-    
+
 }
+
 @media screen and (width <=800px) {
     .container {
         grid-template-columns: 50vw 50vw 50vw;
     }
+
     .container.stats {
-        grid-template-columns: 0vw 50vw 50vw !important;;
+        grid-template-columns: 0vw 50vw 50vw !important;
+        ;
     }
 }
 
@@ -29,10 +33,70 @@
 
 .gamePanel {
     overflow: hidden;
+    display: grid;
+    grid-template-rows: 10% 1fr;
 
     >.players {
+        padding: 0px 10px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        gap: calc(50px + 10vw);
+    }
+
+    >.content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+}
+
+.board {
+    --size: 40vw;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+    width: var(--size);
+    height: var(--size);
+
+    >div {
+        box-sizing: border-box;
+        border-color: var(--sub-color);
+        border-style: solid;
+        border-width: 0px;
+    }
+
+    >div:hover {
+        border-color: var(--accent-color);
+        border-width: 2px;
+        cursor: pointer;
+    }
+}
+
+
+.players {}
+
+.playerName {
+    background-color: var(--sub-alt-color);
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
+.playerName.focused {
+    border: 2px solid var(--accent-color);
+}
+
+@media screen and (width <=800px) {
+    .playerName {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+
+    .players {
+        gap: 20px !important;
     }
 }

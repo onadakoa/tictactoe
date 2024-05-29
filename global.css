@@ -1,6 +1,14 @@
 :root {
-    --background-color: #0C0C0C;
-    --text-color: #fbfbfb
+    --background-color: #323437;
+    --text-color: #a8acb3;
+    --accent-color: #e2b714;
+    --sub-color: #646669;
+    --sub-alt-color: #2c2e31;
+
+
+    --board-border-width: 2px;
+
+
 }
 
 
@@ -21,4 +29,22 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+}
+
+
+
+.Bleft {
+    border-left-width: var(--board-border-width) !important;
+}
+
+.Bright {
+    border-right-width: var(--board-border-width) !important;
+}
+
+.Btop {
+    border-top-width: var(--board-border-width) !important;
+}
+
+.Bbottom {
+    border-bottom-width: var(--board-border-width) !important;
 }
