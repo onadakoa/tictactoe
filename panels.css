@@ -51,6 +51,7 @@
 
 .board {
     --size: 40vw;
+    --max-size: 500px;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,6 +59,9 @@
 
     width: var(--size);
     height: var(--size);
+
+    max-width: var(--max-size);
+    max-height: var(--max-size);
 
     >div {
         box-sizing: border-box;
