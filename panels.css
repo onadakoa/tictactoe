@@ -163,6 +163,7 @@
 
     >div:hover {
         border: 2px solid var(--accent-color);
+        background-color: color-mix(in srgb, var(--background-color) 100%, white 5%);
         cursor: pointer;
     }
 }
