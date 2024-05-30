@@ -10,10 +10,14 @@
 
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="panels.css">
+
+
+    <!-- scripts -->
+    <script src="/js/Board.js"></script>
 </head>
 
 <body>
-    <div class="container stats">
+    <div class="container">
         <div class="gamePanel">
             <div class="players">
                 <div>
@@ -25,15 +29,15 @@
             </div>
             <div class="content">
                 <div class="board">
-                    <div class="Bright Bbottom"></div>
-                    <div class="Bright Bbottom"></div>
+                    <div class="Bleft Btop"></div>
+                    <div class="Btop"></div>
+                    <div class="Btop Bright"></div>
+                    <div class="Bleft "></div>
+                    <div class=""></div>
+                    <div class="Bright"></div>
+                    <div class="Bleft Bbottom"></div>
                     <div class="Bbottom"></div>
                     <div class="Bright Bbottom"></div>
-                    <div class="Bright Bbottom"></div>
-                    <div class="Bbottom"></div>
-                    <div class="Bright"></div>
-                    <div class="Bright"></div>
-                    <div></div>
                 </div>
             </div>
         </div>
@@ -73,7 +77,7 @@
                     <div>Start Game</div>
                 </div>
                 <div class="statistics">
-                    <div>Statistics</div>
+                    <div onclick="document.querySelector('.container').classList.toggle('stats')">Statistics</div>
                 </div>
             </div>
         </div>

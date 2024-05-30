@@ -34,19 +34,19 @@ body {
 
 
 .Bleft {
-    border-left-width: var(--board-border-width) !important;
+    border-left-width: 0px !important;
 }
 
 .Bright {
-    border-right-width: var(--board-border-width) !important;
+    border-right-width: 0px !important;
 }
 
 .Btop {
-    border-top-width: var(--board-border-width) !important;
+    border-top-width: 0px !important;
 }
 
 .Bbottom {
-    border-bottom-width: var(--board-border-width) !important;
+    border-bottom-width: 0px !important;
 }
 
 
