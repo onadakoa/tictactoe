@@ -68,6 +68,13 @@
         border-color: var(--sub-color);
         border-style: solid;
         border-width: var(--board-border-width);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        >span {
+            font-size: 10vw;
+        }
     }
 
     >div:hover {
