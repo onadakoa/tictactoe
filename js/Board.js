@@ -33,6 +33,24 @@ const BOARD_CREATE_FUNC = (v, i, arr) => {
  */
 
 
+
+// BOARD EVENTS
+/**
+ * @type {((i:number) => void)[]}
+ */
+let BoardClickEvents = [];
+/**
+ * 
+ * @param {(i:numebr)=>void} event 
+ */
+function addBoardEvent(event) {
+    BoardClickEvents.push(event)
+}
+function BoardClicked(i) {
+    BoardClickEvents.forEach((v) => v(i))
+}
+
+
 class BoardManager {
 
     /**
@@ -51,9 +69,9 @@ class BoardManager {
     /**
      *
      * @private
-     * @type {[Object,Object]}
+     * @type {[PlayerController, PlayerController]}
      */
-    playersArray;
+    playersArray = new Array(2);
 
     /**
      *
@@ -62,15 +80,35 @@ class BoardManager {
      */
     currentPlayer = 1
 
+    boardSelector;
+
     /**
      * 
      * @param {number} [size=3]
+     * @param {string} boardCssSelector
      */
-    constructor(size = 3) {
+    constructor(boardCssSelector, size = 3) {
         this.boardSize = size;
-
+        this.boardSelector = boardCssSelector;
         this.boardArray = new Array(size * size).fill(0)
 
+        addBoardEvent((i) => {
+            this.playersArray.forEach(v => {
+                if (v == undefined) return;
+                v.boardClicked(i)
+            })
+        })
+
+        this.renderBoard();
+    }
+
+    playerMadeMove = (index, symbol) => {
+        if (symbol != number) throw Error("symbol must be number");
+        if (this.boardArray[index] != 0) throw Error(`Board cell is taken on ${index}`);
+
+        this.boardArray[index] = symbol;
+
+        this.renderBoard();
     }
 
 
@@ -86,18 +124,72 @@ class BoardManager {
             let [classes, content] = createClass(v, i, obj);
 
             let tmp = (`
-                <div class="${classes}">${content}</div> 
+                <div class="${classes}" onclick="BoardClicked(${i})">${content}</div> 
             `)
             out += tmp.trim();
         })
         return out;
+    }
+
+    /**
+     * @private
+     */
+    renderBoard() {
+        let boardTree = document.querySelector(this.boardSelector)
+        if (boardTree == null) throw Error(`can't find ${this.boardSelector} selector`);
+        boardTree.innerHTML = this.renderHtml(BOARD_CREATE_FUNC);
+    }
+
+    /**
+     * 
+     * @param {number} index 0 or 1 
+     * @param {PlayerController} controller 
+     */
+    setPlayer(index, controller) {
+        let tmp = new BoardController(controller.getPlayerSymbol());
+        tmp.makeMove = this.playerMadeMove;
+        tmp.getCurrentPlayer = () => { this.currentPlayer }
+
+        controller.setupByBoard(tmp)
+        this.playersArray[index] = controller;
+    }
+}
+
+
+class BoardController {
+
+    playerSymbol;
+
+    constructor(playerSymbol) {
+        this.playerSymbol = playerSymbol;
+    }
+
+    /**
+     * @type {((index, symbol) => void)}
+     * @private
+     */
+    makeMove;
+
+    /**
+     * @param {number} index 
+     */
+    move(index) {
+        this.makeMove(index, this.playerSymbol)
+    }
+
+
+    /**
+     * @type {()=>number}
+     */
+    getCurrentPlayer;
+    isMyMove() {
+        if (this.getCurrentPlayer() == this.playerSymbol) return true;
+        return false;
     }
 }
 
 
 
 
-
-let tmp = new BoardManager();
 
 
