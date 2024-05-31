@@ -3,14 +3,6 @@
 
 class HumanPlayer extends PlayerController {
 
-    // /**
-    //  * 
-    //  * @param {string} playerName 
-    //  * @param {PlayerSymbol} symbol X or O 
-    //  */
-    // constructor(playerName, symbol) {
-    //     super(symbol, playerName)
-    // }
 
     /**
      * @override 
@@ -18,7 +10,7 @@ class HumanPlayer extends PlayerController {
     boardClicked(i) {
         if (!this.BoardController.isMyMove()) return;
         if (this.BoardController.isCellOccupied(i)) return;
-        this.BoardController.move(i);
+        this.makeMove(i)
     }
 
 }

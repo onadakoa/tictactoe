@@ -102,6 +102,9 @@ class BoardManager {
         this.renderBoard();
     }
 
+    evaluatePlayerMoveEvent = () => {
+        this.playersArray.forEach(v => { if (v.getPlayerSymbol() == this.currentPlayer) v.BmyMove() })
+    }
     switchCurrentPlayer = () => {
         if (this.currentPlayer == 1) this.currentPlayer = -1;
         else if (this.currentPlayer == -1) this.currentPlayer = 1;
@@ -114,6 +117,7 @@ class BoardManager {
         this.switchCurrentPlayer();
 
         this.renderBoard();
+        this.evaluatePlayerMoveEvent();
     }
 
 
