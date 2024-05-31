@@ -73,7 +73,8 @@
         align-items: center;
 
         >span {
-            font-size: 10vw;
+            /* font-size: 10vw; */
+            font-size: min(10vw, 125px);
         }
     }
 
