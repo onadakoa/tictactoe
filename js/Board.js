@@ -102,11 +102,16 @@ class BoardManager {
         this.renderBoard();
     }
 
+    switchCurrentPlayer = () => {
+        if (this.currentPlayer == 1) this.currentPlayer = -1;
+        else if (this.currentPlayer == -1) this.currentPlayer = 1;
+    }
     playerMadeMove = (index, symbol) => {
-        if (symbol != number) throw Error("symbol must be number");
+        if (typeof symbol != typeof 0) throw Error("symbol must be number");
         if (this.boardArray[index] != 0) throw Error(`Board cell is taken on ${index}`);
 
         this.boardArray[index] = symbol;
+        this.switchCurrentPlayer();
 
         this.renderBoard();
     }
@@ -148,7 +153,11 @@ class BoardManager {
     setPlayer(index, controller) {
         let tmp = new BoardController(controller.getPlayerSymbol());
         tmp.makeMove = this.playerMadeMove;
-        tmp.getCurrentPlayer = () => { this.currentPlayer }
+        tmp.getCurrentPlayer = () => { return this.currentPlayer }
+        tmp.isCellOccupied = (index) => {
+            if (this.boardArray[index] != 0) return true;
+            return false
+        }
 
         controller.setupByBoard(tmp)
         this.playersArray[index] = controller;
@@ -159,6 +168,10 @@ class BoardManager {
 class BoardController {
 
     playerSymbol;
+    /**
+     * @type {(index: number) => boolean}
+     */
+    isCellOccupied;
 
     constructor(playerSymbol) {
         this.playerSymbol = playerSymbol;
