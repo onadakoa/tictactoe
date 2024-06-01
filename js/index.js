@@ -34,6 +34,8 @@ const PLAYER_CLASS = {
     2: MiniMaxPlayer
 }
 
+/**@type {HTMLDivElement} */
+const container = document.querySelector(".container")
 
 /**@type {HTMLDivElement} */
 const namePlateA = document.querySelector("#A")
@@ -194,7 +196,9 @@ const gameEnd = (Board) => {
 
 
 startButton.addEventListener("click", () => {
-    // debugger
+    container.classList.remove("stats")
+    container.classList.add("game")
+
     currentBoard = new BoardManager(".board", 3)
     currentBoard.setPlayer(0, new (PLAYER_CLASS[currentPlayers[0].class_id])("X", currentPlayers[0].name, "#A"))
     currentBoard.setPlayer(1, new (PLAYER_CLASS[currentPlayers[1].class_id])("O", currentPlayers[1].name, "#B"))
