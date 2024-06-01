@@ -82,6 +82,11 @@ class BoardManager {
 
     boardSelector;
 
+    isBoardFull = () => {
+        if (this.boardArray.filter((v) => v == 0).length >= 1) return false;
+        return true;
+    }
+
     /**
      * 
      * @param {number} [size=3]
@@ -162,6 +167,7 @@ class BoardManager {
             if (this.boardArray[index] != 0) return true;
             return false
         }
+        tmp.isBoardFull = () => { return this.isBoardFull() }
 
         controller.setupByBoard(tmp)
         this.playersArray[index] = controller;
@@ -176,6 +182,7 @@ class BoardController {
      * @type {(index: number) => boolean}
      */
     isCellOccupied;
+    isBoardFull;
 
     constructor(playerSymbol) {
         this.playerSymbol = playerSymbol;

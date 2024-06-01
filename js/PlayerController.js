@@ -75,6 +75,14 @@ class PlayerController {
     setupByBoard(BoardController) {
         this.BoardController = BoardController;
         this.setNamePlateFocus(this.BoardController.isMyMove(), true)
+        this.setup();
+    }
+
+    /**
+     * @abstract
+     */
+    setup() {
+
     }
 
 }
