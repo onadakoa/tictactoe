@@ -5,7 +5,7 @@
     transition-duration: 300ms;
 
     >div {
-        height: 100vh;
+        height: 100%;
     }
 }
 
