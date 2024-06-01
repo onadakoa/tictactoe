@@ -15,6 +15,7 @@ class PlayerController {
      * @type {string}
      */
     playerName;
+    getPlayerName = () => { return this.playerName }
     namePlateSelector;
 
     /**
@@ -81,9 +82,7 @@ class PlayerController {
     /**
      * @abstract
      */
-    setup() {
-
-    }
+    setup() { }
 
 }
 

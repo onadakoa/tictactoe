@@ -5,6 +5,16 @@ const PLAYER_SYMBOL = {
     [-1]: "O"
 }
 
+const WIN_STATES = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
 const translateToSymbol = (number) => {
     if (number == 1) { return "close" }
     if (number == -1) { return "circle" }
@@ -27,6 +37,7 @@ const BOARD_CREATE_FUNC = (v, i, arr) => {
     }
     return [cls, `<span class='material-symbols-outlined'>${translateToSymbol(v)}</span>`]
 }
+const copyObj = (any) => { return JSON.parse(JSON.stringify(any)) }
 
 /**
  * @typedef {("X"|"O")} PlayerSymbol
@@ -78,7 +89,7 @@ class BoardManager {
      * @private
      * @type {number}
      */
-    currentPlayer = 1
+    currentPlayer = 0
 
     boardSelector;
 
@@ -119,12 +130,80 @@ class BoardManager {
         if (this.boardArray[index] != 0) throw Error(`Board cell is taken on ${index}`);
 
         this.boardArray[index] = symbol;
-        this.switchCurrentPlayer();
-
         this.renderBoard();
+        if (this.checkEnd()) return;
+
+        this.switchCurrentPlayer();
         this.evaluatePlayerMoveEvent();
     }
 
+
+    /**
+     * 
+     * @param {PlayerSymbol} startPlayer 
+     */
+    startGame(startPlayer = "X") {
+        this.currentPlayer = PLAYER_SYMBOL[startPlayer]
+        this.evaluatePlayerMoveEvent();
+    }
+
+    /**
+     * @param {number} playerSymbol 0 or 1 
+     * @returns {[boolean, number]}
+     */
+    checkPlayerWin(playerSymbol) {
+        for (let i = 0; i < WIN_STATES.length; i++) {
+            let winpos = 0;
+            for (let k = 0; k < 3; k++) {
+                if (this.boardArray[WIN_STATES[i][k]] != playerSymbol) break;
+                winpos++;
+            }
+            if (winpos == 3) return [true, i];
+        }
+        return [false, -1];
+    }
+    checkEnd() {
+        /** @type {PlayerController} */
+        let winner = 0;
+        this.playersArray.forEach(p => {
+            if (this.checkPlayerWin(p.getPlayerSymbol())[0]) winner = p;
+        })
+
+        if (winner != 0) {
+            //win
+            console.log("winner: ", winner.getPlayerName())
+            return true;
+        };
+        if (this.getEmptyCells().length <= 0) {
+            //tie
+            console.log("tie")
+            return true
+        }
+
+        return false;
+    }
+
+    /**
+     * @returns {{index:number, value:number}[]} 
+     */
+    getEmptyCells() {
+        /** @type {number[]} */
+        let tmp = copyObj(this.boardArray)
+        let out = []
+        tmp.forEach((v, i) => {
+            if (v == 0) out.push({ index: i, value: v })
+        })
+        return out;
+    }
+    /**
+     * @param {number} symbol 
+     * @returns {PlayerController}
+     */
+    getPlayerBySymbol(symbol) {
+        let out = null;
+        this.playersArray.forEach(p => { if (p.getPlayerSymbol() == symbol) out = p; });
+        return out;
+    }
 
     /**
      *
@@ -168,6 +247,7 @@ class BoardManager {
             return false
         }
         tmp.isBoardFull = () => { return this.isBoardFull() }
+        tmp.getBoard = () => { return copyObj(this.boardArray) }
 
         controller.setupByBoard(tmp)
         this.playersArray[index] = controller;
@@ -183,6 +263,10 @@ class BoardController {
      */
     isCellOccupied;
     isBoardFull;
+    /**
+     *  @type {() => number[]}
+     */
+    getBoard;
 
     constructor(playerSymbol) {
         this.playerSymbol = playerSymbol;
