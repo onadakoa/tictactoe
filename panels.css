@@ -65,9 +65,9 @@
 
 }
 
-@media screen and (600 > width <=800px) {
+@media screen and (600px < width <=800px) {
     .container {
-        grid-template-columns: 50vw 50vw 50vw;
+        grid-template-columns: 50vw 50vw 50vw !important;
     }
 
     .container.stats {
@@ -289,6 +289,7 @@
         flex-direction: column;
         width: 80%;
         box-sizing: border-box;
+        overflow: hidden;
 
 
         >div {
@@ -300,7 +301,10 @@
             text-align: center;
 
             background-color: color-mix(in srgb, var(--sub-alt-color) 100%, #aaaaaa 10%);
-            overflow: hidden;
+
+            >div {
+                overflow: hidden;
+            }
         }
 
         >.head {
