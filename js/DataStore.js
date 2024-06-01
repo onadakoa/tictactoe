@@ -30,6 +30,11 @@ class DataStore {
     }
 
     pull() {
+        if (localStorage.getItem(this.storageKey) == null) throw Error(this.storageKey + " leads to an empty storage")
         this.value = JSON.parse(localStorage.getItem(this.storageKey));
+    }
+
+    clear() {
+        localStorage.removeItem(this.storageKey)
     }
 }

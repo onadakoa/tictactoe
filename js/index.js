@@ -195,6 +195,11 @@ const gameEnd = (Board) => {
 }
 
 
+resetButton.addEventListener("click", () => {
+    stat.clear();
+    location.reload();
+})
+
 startButton.addEventListener("click", () => {
     container.classList.remove("stats")
     container.classList.add("game")
