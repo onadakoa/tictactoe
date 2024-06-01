@@ -91,6 +91,38 @@ class BoardManager {
      */
     currentPlayer = 0
 
+    /**
+     * @type {PlayerController} 
+     * @private
+    */
+    winner = undefined;
+    /** 
+     * @type {("init" | "playing" | "tie" | "winner")} 
+     * @private
+    */
+    gameStatus = "init"
+    getGameStatus() {
+        return { status: this.gameStatus, winner: this.winner }
+    }
+    /** @type {(Board: BoardController) => void} */
+    EndCallback = () => { };
+
+    /** 
+     * @type {number} 
+     * @private
+    */
+    gameStartTimestamp = 0;
+    /** 
+    * @type {number} 
+    * @private
+    */
+    gameEndTimestamp = 0;
+    getGameDurationTimestamp() {
+        if (this.gameStatus == "init") return 0;
+        if (this.gameStatus == "playing") return (new Date()).getTime() - this.gameStartTimestamp;
+        return this.gameEndTimestamp - this.gameStartTimestamp;
+    }
+
     boardSelector;
 
     isBoardFull = () => {
@@ -131,7 +163,11 @@ class BoardManager {
 
         this.boardArray[index] = symbol;
         this.renderBoard();
-        if (this.checkEnd()) return;
+        if (this.checkEnd()) {
+            this.gameEndTimestamp = (new Date()).getTime();
+            this.EndCallback(this)
+            return;
+        };
 
         this.switchCurrentPlayer();
         this.evaluatePlayerMoveEvent();
@@ -141,9 +177,16 @@ class BoardManager {
     /**
      * 
      * @param {PlayerSymbol} startPlayer 
+     * @param {(Board: BoardManager)=>void} gameFinishedEvent
      */
-    startGame(startPlayer = "X") {
+    startGame(gameFinishedEvent, startPlayer = "X") {
         this.currentPlayer = PLAYER_SYMBOL[startPlayer]
+        this.gameStatus = "playing"
+        this.EndCallback = gameFinishedEvent
+        this.boardArray.fill(0)
+
+        this.gameStartTimestamp = (new Date()).getTime()
+        this.gameEndTimestamp = 0;
         this.evaluatePlayerMoveEvent();
     }
 
@@ -171,12 +214,15 @@ class BoardManager {
 
         if (winner != 0) {
             //win
-            console.log("winner: ", winner.getPlayerName())
+            // console.log("winner: ", winner.getPlayerName())
+            this.winner = winner;
+            this.gameStatus = "winner"
             return true;
         };
         if (this.getEmptyCells().length <= 0) {
             //tie
-            console.log("tie")
+            // console.log("tie")
+            this.gameStatus = "tie"
             return true
         }
 

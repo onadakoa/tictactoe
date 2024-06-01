@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="panels.css">
+    <link rel="stylesheet" href="gameStatus.css">
 
 
     <!-- scripts -->
@@ -29,7 +30,7 @@
                     <div class="playerName" id="A">onadakoa</div>
                 </div>
                 <div>
-                    <div class="playerName focused" id="B">Bot Group</div>
+                    <div class="playerName " id="B">Bot Group</div>
                 </div>
             </div>
             <div class="content">
@@ -53,9 +54,9 @@
                     <div class="player">
                         <div class="type">
                             <select id="playerAType">
-                                <option value="Human">Human</option>
-                                <option value="random">Random moves</option>
-                                <option value="minimax">MiniMax algorithm</option>
+                                <option value="0">Human</option>
+                                <option value="1">Random moves</option>
+                                <option value="2">MiniMax algorithm</option>
                             </select>
                         </div>
                         <div class="name">
@@ -66,9 +67,9 @@
                     <div class="player">
                         <div class="type">
                             <select id="playerBType">
-                                <option value="Human">Human</option>
-                                <option value="random">Random moves</option>
-                                <option value="minimax">MiniMax algorithm</option>
+                                <option value="0">Human</option>
+                                <option value="1">Random moves</option>
+                                <option value="2">MiniMax algorithm</option>
                             </select>
                         </div>
                         <div class="name">
@@ -105,6 +106,16 @@
             </div>
             <div class="reset">
                 Reset Data <span class="material-symbols-outlined">restart_alt</span>
+            </div>
+        </div>
+    </div>
+    <div class="endMask noDisplay">
+
+        <div class="gameStatus">
+            <div class="title" id="statusTitle">onadakoa Won</div>
+            <div class="options">
+                <div class="time">Time: <span id="statusTime">0:00:00</span></div>
+                <div class="button" id="statusClose">OK</div>
             </div>
         </div>
     </div>

@@ -1,0 +1,69 @@
+.endMask {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    /* display: none; */
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameStatus {
+    min-width: 300px;
+
+    background-color: var(--sub-alt-color);
+    padding: 10px;
+    border: 2px solid var(--accent-color);
+
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    gap: 15px;
+}
+
+.gameStatus>.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameStatus>.options {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.gameStatus>.title {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.gameStatus>.options>.time {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-direction: row;
+    gap: 10px;
+
+    >span {
+        font-weight: 600;
+    }
+}
+
+.gameStatus>.options>.button {
+    background-color: var(--sub-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-weight: 900;
+
+
+}
+
+.gameStatus>.options>.button:hover {
+    cursor: pointer;
+    background-color: color-mix(in srgb, var(--sub-color) 100%, #222222 10%);
+}
