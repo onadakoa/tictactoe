@@ -250,6 +250,13 @@ class BoardManager {
         this.playersArray.forEach(p => { if (p.getPlayerSymbol() == symbol) out = p; });
         return out;
     }
+    /**
+     * @param {number} index 
+     * @returns {PlayerController}
+     */
+    getPlayer(index) {
+        return this.playersArray[index]
+    }
 
     /**
      *
